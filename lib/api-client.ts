@@ -56,10 +56,14 @@ export const fetchJson = async <T>(
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 30000);
 
+  const combinedSignal = init?.signal
+    ? AbortSignal.any([controller.signal, init.signal])
+    : controller.signal;
+
   try {
     const response = await fetch(input, {
       ...init,
-      signal: controller.signal,
+      signal: combinedSignal,
       headers: {
         "Content-Type": "application/json",
         ...init?.headers,

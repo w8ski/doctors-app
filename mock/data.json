@@ -6,7 +6,7 @@
       "procedure": "Routine Cleaning",
       "dentist": "Dr. Alvarez",
       "date": "2025-01-12",
-      "status": "scheduled",
+      "status": "completed",
       "notes": "First visit of the year.",
       "cost": 120
     },

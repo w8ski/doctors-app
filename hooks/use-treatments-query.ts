@@ -36,9 +36,10 @@ export const useTreatmentsQuery = (params: UseTreatmentsQueryParams = {}) => {
 
   return useQuery<TreatmentsListResponse>({
     queryKey: queryKeys.treatments.list({ search, status, page, pageSize }),
-    queryFn: async () => {
+    queryFn: async ({ signal }) => {
       return fetchJson<TreatmentsListResponse>(buildUrl(), {
         schema: TreatmentsListResponseSchema,
+        signal,
       });
     },
     staleTime: 30000,

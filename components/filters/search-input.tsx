@@ -13,19 +13,12 @@ export const SearchInput = ({
   onChange,
   isSearching,
 }: SearchInputProps) => {
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      onChange(event.target.value);
-    },
-    [onChange]
-  );
-
   return (
     <div className="relative flex-1">
       <Input
         placeholder="Search patients, procedures, dentists..."
         value={value}
-        onChange={handleChange}
+        onChange={(event) => onChange(event.target.value)}
       />
       {isSearching && (
         <div className="absolute right-3 top-1/2 -translate-y-1/2">
