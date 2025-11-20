@@ -80,6 +80,26 @@ export async function getNextTreatmentId() {
   return data.treatments.reduce((max, item) => Math.max(max, item.id), 0) + 1;
 }
 
+export async function deleteTreatment(id: number) {
+  const data = await readDataFile();
+  const index = data.treatments.findIndex((item) => item.id === id);
+
+  if (index === -1) {
+    return false;
+  }
+
+  const updated: DataFile = {
+    treatments: [
+      ...data.treatments.slice(0, index),
+      ...data.treatments.slice(index + 1),
+    ],
+  };
+
+  await writeDataFile(updated);
+
+  return true;
+}
+
 export async function resetTreatments() {
   await writeDataFile({ treatments: [...initialTreatments] });
 }

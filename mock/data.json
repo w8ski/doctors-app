@@ -36,7 +36,7 @@
       "procedure": "Crown Fitting",
       "dentist": "Dr. Alvarez",
       "date": "2025-02-02",
-      "status": "in_progress",
+      "status": "completed",
       "notes": "Waiting on lab results for permanent crown.",
       "cost": 760
     },
@@ -56,7 +56,7 @@
       "procedure": "Dental Implant Consultation",
       "dentist": "Dr. Patel",
       "date": "2025-03-07",
-      "status": "scheduled",
+      "status": "completed",
       "notes": "Evaluate bone density and insurance coverage.",
       "cost": 150
     },
@@ -399,6 +399,16 @@
       "status": "in_progress",
       "notes": "Performing weekly adjustments.",
       "cost": 520
+    },
+    {
+      "id": 41,
+      "patient": "Simon Wie",
+      "procedure": "Filling",
+      "dentist": "Dr. Smith",
+      "date": "2025-11-24",
+      "status": "scheduled",
+      "notes": "",
+      "cost": 50
     }
   ]
 }

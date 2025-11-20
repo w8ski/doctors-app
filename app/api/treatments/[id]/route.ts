@@ -1,6 +1,10 @@
 import { NextResponse } from "next/server";
 
-import { getTreatmentById, updateTreatment } from "@/mock/data";
+import {
+  deleteTreatment,
+  getTreatmentById,
+  updateTreatment,
+} from "@/mock/data";
 import { withSimulate } from "@/mock/simulate";
 
 function parseId(value: string) {
@@ -69,6 +73,39 @@ export async function PATCH(
       }
 
       return NextResponse.json(updated);
+    },
+    {
+      allowFailure: true,
+    }
+  );
+}
+
+export async function DELETE(
+  _request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const paramsData = await params;
+  const id = parseId(paramsData.id);
+
+  if (id === null) {
+    return NextResponse.json(
+      { message: "Invalid treatment id." },
+      { status: 400 }
+    );
+  }
+
+  return withSimulate(
+    async () => {
+      const deleted = await deleteTreatment(id);
+
+      if (!deleted) {
+        return NextResponse.json(
+          { message: "Treatment not found." },
+          { status: 404 }
+        );
+      }
+
+      return NextResponse.json({ success: true }, { status: 200 });
     },
     {
       allowFailure: true,
