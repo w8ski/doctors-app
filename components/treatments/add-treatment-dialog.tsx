@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -37,27 +37,21 @@ export const AddTreatmentDialog = () => {
     },
   });
 
-  const onSubmit = useCallback(
-    (data: CreateTreatmentInput) => {
-      createMutation.mutate(data, {
-        onSuccess: () => {
-          reset();
-          setOpen(false);
-        },
-      });
-    },
-    [createMutation, reset]
-  );
-
-  const handleOpenChange = useCallback(
-    (newOpen: boolean) => {
-      setOpen(newOpen);
-      if (!newOpen) {
+  const onSubmit = (data: CreateTreatmentInput) => {
+    createMutation.mutate(data, {
+      onSuccess: () => {
         reset();
-      }
-    },
-    [reset]
-  );
+        setOpen(false);
+      },
+    });
+  };
+
+  const handleOpenChange = (newOpen: boolean) => {
+    setOpen(newOpen);
+    if (!newOpen) {
+      reset();
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>

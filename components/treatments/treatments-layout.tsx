@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { SearchInput } from "@/components/filters/search-input";
 import { StatusFilter } from "@/components/filters/status-filter";
 import type { TreatmentStatus } from "@/lib/treatments-schema";
@@ -21,19 +20,13 @@ export const TreatmentsLayout = ({
   isSearching,
   children,
 }: TreatmentsLayoutProps) => {
-  const handleSearchChange = useCallback(
-    (value: string) => {
-      onSearchChange(value);
-    },
-    [onSearchChange]
-  );
+  const handleSearchChange = (value: string) => {
+    onSearchChange(value);
+  };
 
-  const handleStatusChange = useCallback(
-    (value: TreatmentStatus | "all") => {
-      onStatusChange(value);
-    },
-    [onStatusChange]
-  );
+  const handleStatusChange = (value: TreatmentStatus | "all") => {
+    onStatusChange(value);
+  };
 
   return (
     <div className="container mx-auto flex flex-col gap-6 py-10">

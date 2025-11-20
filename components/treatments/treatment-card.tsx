@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -33,41 +33,38 @@ export const TreatmentCard = ({ treatment }: TreatmentCardProps) => {
   const updateStatusMutation = useUpdateTreatmentStatusMutation();
   const deleteMutation = useDeleteTreatmentMutation();
 
-  const handleStatusChange = useCallback(
-    (status: Treatment["status"]) => {
-      if (!status) return;
+  const handleStatusChange = (status: Treatment["status"]) => {
+    if (!status) return;
 
-      updateStatusMutation.mutate(
-        { id: treatment.id, status },
-        {
-          onSuccess: () => {
-            setIsDialogOpen(false);
-          },
-        }
-      );
-    },
-    [treatment.id, updateStatusMutation]
-  );
+    updateStatusMutation.mutate(
+      { id: treatment.id, status },
+      {
+        onSuccess: () => {
+          setIsDialogOpen(false);
+        },
+      }
+    );
+  };
 
-  const handleOpenChange = useCallback((open: boolean) => {
+  const handleOpenChange = (open: boolean) => {
     setIsDialogOpen(open);
-  }, []);
+  };
 
-  const handleDeleteClick = useCallback(() => {
+  const handleDeleteClick = () => {
     setIsDeleteDialogOpen(true);
-  }, []);
+  };
 
-  const handleDeleteConfirm = useCallback(() => {
+  const handleDeleteConfirm = () => {
     deleteMutation.mutate(treatment.id, {
       onSuccess: () => {
         setIsDeleteDialogOpen(false);
       },
     });
-  }, [deleteMutation, treatment.id]);
+  };
 
-  const handleDeleteDialogChange = useCallback((open: boolean) => {
+  const handleDeleteDialogChange = (open: boolean) => {
     setIsDeleteDialogOpen(open);
-  }, []);
+  };
 
   return (
     <>

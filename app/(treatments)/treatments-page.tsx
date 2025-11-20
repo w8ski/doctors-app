@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { TreatmentEmptyState } from "@/components/treatments/treatment-empty-state";
 import { TreatmentErrorState } from "@/components/treatments/treatment-error-state";
@@ -28,14 +28,11 @@ export const TreatmentsPage = () => {
       pageSize: filters.pageSize,
     });
 
-  const updateUrl = useCallback(
-    (newFilters: Partial<typeof filters>) => {
-      const updatedFilters = { ...filters, ...newFilters };
-      const params = buildSearchParams(updatedFilters);
-      router.replace(`?${params.toString()}`, { scroll: false });
-    },
-    [filters, router]
-  );
+  const updateUrl = (newFilters: Partial<typeof filters>) => {
+    const updatedFilters = { ...filters, ...newFilters };
+    const params = buildSearchParams(updatedFilters);
+    router.replace(`?${params.toString()}`, { scroll: false });
+  };
 
   useEffect(() => {
     if (debouncedSearch !== filters.search) {
@@ -48,31 +45,25 @@ export const TreatmentsPage = () => {
     }
   }, [debouncedSearch, filters, router]);
 
-  const handleSearchChange = useCallback((search: string) => {
+  const handleSearchChange = (search: string) => {
     setLocalSearch(search);
-  }, []);
+  };
 
-  const handleStatusChange = useCallback(
-    (status: TreatmentStatus | "all") => {
-      updateUrl({ status, page: 1 });
-    },
-    [updateUrl]
-  );
+  const handleStatusChange = (status: TreatmentStatus | "all") => {
+    updateUrl({ status, page: 1 });
+  };
 
-  const handlePageChange = useCallback(
-    (page: number) => {
-      updateUrl({ page });
-    },
-    [updateUrl]
-  );
+  const handlePageChange = (page: number) => {
+    updateUrl({ page });
+  };
 
-  const handleClearFilters = useCallback(() => {
+  const handleClearFilters = () => {
     updateUrl({ search: "", status: "all", page: 1 });
-  }, [updateUrl]);
+  };
 
-  const handleRetry = useCallback(() => {
+  const handleRetry = () => {
     refetch();
-  }, [refetch]);
+  };
 
   const hasFilters = filters.search !== "" || filters.status !== "all";
   const hasData = data && data.data.length > 0;

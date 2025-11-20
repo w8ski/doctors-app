@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -13,17 +12,17 @@ export const TreatmentPagination = ({
   totalPages,
   onPageChange,
 }: TreatmentPaginationProps) => {
-  const handlePrevious = useCallback(() => {
+  const handlePrevious = () => {
     if (currentPage > 1) {
       onPageChange(currentPage - 1);
     }
-  }, [currentPage, onPageChange]);
+  };
 
-  const handleNext = useCallback(() => {
+  const handleNext = () => {
     if (currentPage < totalPages) {
       onPageChange(currentPage + 1);
     }
-  }, [currentPage, totalPages, onPageChange]);
+  };
 
   if (totalPages <= 1) {
     return null;

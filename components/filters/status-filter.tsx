@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import {
   Select,
   SelectContent,
@@ -23,12 +22,9 @@ const STATUS_OPTIONS: Array<{ label: string; value: TreatmentStatus | "all" }> =
   ];
 
 export const StatusFilter = ({ value, onChange }: StatusFilterProps) => {
-  const handleValueChange = useCallback(
-    (newValue: string) => {
-      onChange(newValue as TreatmentStatus | "all");
-    },
-    [onChange]
-  );
+  const handleValueChange = (newValue: string) => {
+    onChange(newValue as TreatmentStatus | "all");
+  };
 
   return (
     <Select value={value} onValueChange={handleValueChange}>

@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import {
   Select,
   SelectContent,
@@ -26,12 +25,9 @@ export const TreatmentStatusSelect = ({
   onChange,
   disabled,
 }: TreatmentStatusSelectProps) => {
-  const handleValueChange = useCallback(
-    (newValue: string) => {
-      onChange(newValue as TreatmentStatus);
-    },
-    [onChange]
-  );
+  const handleValueChange = (newValue: string) => {
+    onChange(newValue as TreatmentStatus);
+  };
 
   return (
     <Select value={value} onValueChange={handleValueChange} disabled={disabled}>
